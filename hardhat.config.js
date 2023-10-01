@@ -1,5 +1,7 @@
+require("@nomiclabs/hardhat-ethers");
 require("@nomiclabs/hardhat-waffle"); // used for smart contract testing https://getwaffle.io/
-
+require('dotenv').config();
+const { API_URL, PRIVATE_KEY } = process.env;
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
 task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
@@ -24,10 +26,11 @@ module.exports = {
   networks: {
     hardhat: { // used to connect localhost hardhat node to metamask
       chainId: 1337,
-    },
+    }, 
     sepolia: {
-      url: 'REPLACE WITH ALCHEMY URL KEY',
-      accounts: ['REPLACE WITH METAMASK PRIVATE KEY'] // DD NOT UPLOAD WITH PRIVATE KEY better to use env vars
+      url: API_URL,
+      accounts: [`0x${PRIVATE_KEY}`] // DD NOT UPLOAD WITH PRIVATE KEY better to use env vars
     }
+    
   },
 };
